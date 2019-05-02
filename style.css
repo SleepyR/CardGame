@@ -12,12 +12,10 @@ td{
     position: relative;
     width:150px;
     height: 210px;
-    border-radius: 20%;
     background-image: url('cardback_18.png');
     background-size: 150px;
 }
 .front{
-    border-radius: 20%;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -25,7 +23,7 @@ td{
     text-align: center;
     vertical-align: middle;
     line-height: 170px;
-    background-color: #ff7532;
+    background-color: transparent;
     backface-visibility: hidden;
     transform: rotateY(180deg);
 }
