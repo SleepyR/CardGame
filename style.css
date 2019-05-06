@@ -5,9 +5,8 @@ tr{
     perspective: 1000px;
 }
 td{
-    transition: transform 1s;
+    transition: transform 0.5s;
     transform-style: preserve-3d;
-    transition-delay: 1s;
 }
 .card{
     margin: 3px;
@@ -32,18 +31,11 @@ td{
 
 .flip{
     transform: rotateY(180deg);
-    transition-delay: 0s;
 }
-
 .flipBack{
     animation: flipBack 2s;
 }
 @keyframes flipBack {
-    0% {transform: rotateY(0deg);}
-    50% {transform: rotateY(180deg);}
+    0% {transform: rotateY(180deg);}
     100% {transform: rotateY(0deg);}
-}
-@keyframes flip {
-    from {transform: rotateY(0deg);}
-    to {transform: rotateY(180deg);}
 }

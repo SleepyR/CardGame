@@ -10,42 +10,53 @@ function reveal(id) {
         start = false;
         count = 0;
     }
-    if (!document.getElementById(id).children[0].style.backgroundImage) {
+    element = document.getElementById(id).children[0].style;
+    if (!element.backgroundImage) {
         index = parseInt(Math.random() * cards.length);
-        document.getElementById(id).children[0].style.backgroundImage = "url(" + cards[index] + ")";
-        document.getElementById(id).children[0].style.backgroundSize = "150px 210px";
+        element.backgroundImage = "url(" + cards[index] + ")";
+        element.backgroundSize = "150px 210px";
         if (index !== -1) {
             cards.splice(index, 1);
         }
     }
-    if (document.getElementsByTagName("td")[id - 1].classList.contains("flip")) {
-        return;
+    cell = document.getElementsByTagName("td")[id - 1];
+    if (cell.classList.contains("flipBack")) {
+        cell.classList.remove("flipBack");
+        void cell.offsetWidth;
     }
-    document.getElementsByTagName("td")[id - 1].classList.add("flip");
-    current.push(id);
+    if (!cell.classList.contains("flip")) {
+        cell.classList.add('flip');
+        current.push(id);
+    }
     if (current.length === 2) {
-        check(current[0],current[1]);
-        current = [];
+        console.log(current[0],current[1]);
+        if(!(current[0] === current[1])){
+            check(current[0],current[1]);
+            current = [];
+        }
+        else 
+            current = [];
     }
+    
 }
 
 function check(x, y) {
     if (document.getElementById(x).children[0].style.backgroundImage === document.getElementById(y).children[0].style.backgroundImage) {
         count++;
         if (count === 8) {
-            setTimeout(function(){alert("WIN")
+            setTimeout(function(){
+                alert("WIN");
                 for (var i = 1; i <= 16; i++) {
-                    document.getElementsByTagName("td")[i - 1].classList.remove("flip");
+                    document.getElementsByTagName("td")[i - 1].classList.add('flipBack');
                     document.getElementById(i).children[0].style.backgroundImage = "";
                 }
             }, 1000);
             start = true;
-
         }
-    } else {
-        document.getElementsByTagName("td")[x - 1].classList.remove("flip");
+    }
+     else {
         document.getElementsByTagName("td")[y - 1].classList.replace("flip","flipBack");
-
+        document.getElementsByTagName("td")[x - 1].classList.replace("flip","flipBack");
     }
 }
 
