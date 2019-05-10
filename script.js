@@ -99,7 +99,6 @@ function reveal(id) {
     if ((cell.classList[0] !== ("flip"))) {
         cell.classList.add('flip');
     }
-    console.log(myarr, cards);
 
     if (myarr.length === 2) {
         check(myarr[0], myarr[1]);
