@@ -77,44 +77,59 @@ function reveal(id) {
     element = document.getElementById(id);
     if (!element.dataset.number) {
         index = parseInt(Math.random() * cards.length);
-        element.setAttribute("data-number", cards[index].id);
-        element.children[0].style.backgroundImage = 'url(' + cards[index].value + ')';
-        element.children[0].style.backgroundSize = "150px 210px ";
-        myarr.push(cards[index].id);
+        element.setAttribute("data-number", cards[index].id % 8);
+        element.children[0].setAttribute("data-image", cards[index].value);
         if (index !== -1) {
             cards.splice(index, 1);
         }
-        console.log(myarr, cards);
     }
 
+
     cell = document.getElementsByTagName("td")[id - 1];
+    if(!cell.classList.contains("done"))
+    {
+        myarr.push(id);
+    }
     if (cell.classList.contains("flipBack")) {
         cell.classList.remove("flipBack");
         void cell.offsetWidth;
     }
-    if (!cell.classList.contains("flip")) {
+        console.log(cell.classList[0]);
+
+    if ((cell.classList[0] !== ("flip"))) {
         cell.classList.add('flip');
     }
+    console.log(myarr, cards);
+
     if (myarr.length === 2) {
         check(myarr[0], myarr[1]);
         myarr = [];
     }
 
-
     function check(x, y) {
-        if (!(Math.abs(x - y) === 8)) {
+        element1 = document.getElementById(x);
+        element2 = document.getElementById(y);
+        card1 = element1.getAttribute("data-number");
+        card2 = element2.getAttribute("data-number");
+        if (x !== y && card1 === card2 ) {
             count++;
+            document.getElementsByTagName("td")[x-1].classList.add("done");
+            document.getElementsByTagName("td")[y-1].classList.add("done");
             if (count === 8) {
                 alert("WIN");
                 for (var i = 1; i <= 16; i++) {
+                    document.getElementsByTagName("td")[i-1].classList = "";
                     document.getElementsByTagName("td")[i - 1].classList.add('flipBack');
-                    document.getElementById(i).children[0].style.backgroundImage = "";
+                    document.getElementById(i).setAttribute("data-number", "");                    
+                    document.getElementById(i).children[0].setAttribute("data-image","");
                 }
                 start = true;
-            } else {
-                document.getElementsByTagName("div")[y - 1].classList.replace("flip", "flipBack");
-                document.getElementsByTagName("div")[x - 1].classList.replace("flip", "flipBack");
             }
+        } else if(x === y){
+            document.getElementsByTagName("td")[x - 1].classList.replace("flip", "flipBack");
+        } else {
+            document.getElementsByTagName("td")[y - 1].classList.replace("flip", "flipBack");
+            document.getElementsByTagName("td")[x - 1].classList.replace("flip", "flipBack");
         }
     }
 }

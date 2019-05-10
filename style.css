@@ -28,6 +28,47 @@ td{
     backface-visibility: hidden;
     transform: rotateY(180deg);
 }
+td div[data-number = "1"] .front{
+    background-image: url(cards/Card1.png);
+    background-size:  150px 210px;
+
+}
+td div[data-number = "2"] .front{
+    background-image: url(cards/Card2.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "3"] .front{
+    background-image: url(cards/Card3.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "4"] .front{
+    background-image: url(cards/Card4.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "5"] .front{
+    background-image: url(cards/Card5.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "6"] .front{
+    background-image: url(cards/Card6.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "7"] .front{
+    background-image: url(cards/Card7.png);    
+    background-size:  150px 210px;
+
+}
+td div[data-number = "0"] .front{
+    background-image: url(cards/card.jpg);    
+    background-size:  150px 210px;
+
+}
+
 .done{
     animation: win 1s;
 }
