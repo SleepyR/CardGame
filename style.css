@@ -88,5 +88,22 @@ td div[data-number = "0"] .front{
 }
 
 
+#timer{
+    font-size: 150px;
+    color: #ff8125;
+    border-style: wave;
+}
+.main{
+    display: flex;
+    align-items: center;
+}
+.main > div{
+    margin: 0 100px;
 
-
+}
+ul li{
+    list-style-type: none;
+    font-size: 20px;
+    color: #ff8125;
+    font-style: italic;
+}

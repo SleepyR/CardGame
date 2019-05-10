@@ -1,11 +1,42 @@
 var cards, index;
-let past, last, count = 0;
+let count;
 let start = true;
-let tID;
 let myarr = [];
-let element, cell;
+var element, cell;
+var element1, element2;
+var secs;
+
+function finish() {
+    clearTimeout(tID);
+    for (var i = 1; i <= 16; i++) {
+        document.getElementsByTagName("td")[i-1].classList = "";
+        document.getElementsByTagName("td")[i - 1].classList.add('flipBack');
+        document.getElementById(i).setAttribute("data-number", "");
+        document.getElementById(i).children[0].setAttribute("data-image","");
+    }
+    start = true;
+}
+
+
+function timer() {
+    if(secs === -1){
+        alert("Time is over");
+        finish();
+    }
+    else{
+        tID = setTimeout(()=>{
+            document.getElementById("timer").innerHTML = `${0} : ${secs}`;
+            secs--;
+            timer();
+        },1000);
+    }
+}
 
 function reveal(id) {
+
+    document.cookie = "level = 1";
+    console.log(document.cookie);
+
     if (start) {
         cards = [
             {
@@ -72,8 +103,21 @@ function reveal(id) {
                 value: "cards/card.jpg"
             }];
         start = false;
+        secs = 30;
+        timer();
         count = 0;
+        // timer = setInterval(function() {
+        //     secs--;
+        //     if(secs === -1){
+        //         alert("Time is over");
+        //         finish();
+        //     }
+        //     else{
+        //         document.getElementById("timer").innerHTML = `${0} : ${secs}`;
+        //     }
+        // }, 1000);
     }
+
     element = document.getElementById(id);
     if (!element.dataset.number) {
         index = parseInt(Math.random() * cards.length);
@@ -94,7 +138,6 @@ function reveal(id) {
         cell.classList.remove("flipBack");
         void cell.offsetWidth;
     }
-        console.log(cell.classList[0]);
 
     if ((cell.classList[0] !== ("flip"))) {
         cell.classList.add('flip');
@@ -104,6 +147,7 @@ function reveal(id) {
         check(myarr[0], myarr[1]);
         myarr = [];
     }
+
 
     function check(x, y) {
         element1 = document.getElementById(x);
@@ -116,13 +160,7 @@ function reveal(id) {
             document.getElementsByTagName("td")[y-1].classList.add("done");
             if (count === 8) {
                 alert("WIN");
-                for (var i = 1; i <= 16; i++) {
-                    document.getElementsByTagName("td")[i-1].classList = "";
-                    document.getElementsByTagName("td")[i - 1].classList.add('flipBack');
-                    document.getElementById(i).setAttribute("data-number", "");                    
-                    document.getElementById(i).children[0].setAttribute("data-image","");
-                }
-                start = true;
+                finish();
             }
         } else if(x === y){
             document.getElementsByTagName("td")[x - 1].classList.replace("flip", "flipBack");
